@@ -1,15 +1,19 @@
 #include "../../../include/components/entity/Player.hpp"
 #include "../../../include/components/Input.hpp"
+#include "../../../include/components/NodeType.hpp"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <iostream>
 #include <memory>
 
 entity::Player::Player(const sf::Vector2f &position, const sf::Vector2f &scale,
-                       core::NodeType nodeType, unsigned int health,
-                       float speed)
-    : core::Entity(position, scale, nodeType, health), speed(speed) {
+                       unsigned int health, float speed)
+    : core::Entity(position, scale, core::NodeType::ENTITY_PLAYER, health),
+      speed(speed) {
   sf::Texture texture;
-  texture.loadFromFile("assets/vguy/Fall (32x32).png");
+  if (!texture.loadFromFile("assets/vguy/Jump (32x32).png")) {
+    std::cout << "Loaded!";
+  };
   sprite->setTexture(texture);
 }
 
